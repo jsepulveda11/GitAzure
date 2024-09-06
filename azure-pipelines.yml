@@ -16,14 +16,18 @@ resources:
       ref:  refs/heads/main
 
 stages:
+- stage: Repoexterno
+  jobs:
+  - job: PythonExterno
+    steps:
+    - template: template-python.yml@azure_devops_002
+
+  - job: NodeJsExterno
+    steps:
+    - template: template-nodeJS.yml@azure_devops_002
+
 - stage: runAWS
   jobs:
   - job: runAWSJob
     steps:
     - template: /templates/template-aws-cli.yml
-
-- stage: repoexterno
-  jobs:
-  - job: Repoexterno
-    steps:
-    - checkout: azure_devops_002
