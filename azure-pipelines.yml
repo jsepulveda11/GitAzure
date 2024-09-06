@@ -9,15 +9,21 @@ variables:
   - group: 000-S3-AD
 
 stages:
-- resources:
-  repositories:
-    - repository: template-operaciones
-      type: git
-      name: GitOps/template-pipe-operaciones-gcloud-shell
-      ref:  refs/heads/master
+- stage: PythonConfig
+  jobs:
+  - job: PythonConfigJob
+    steps:
+    - template: /templates/template-python.yml
 
 - stage: runAWS
   jobs:
   - job: runAWSJob
     steps:
     - template: /templates/template-aws-cli.yml
+
+resources:
+  repositories:
+    - repository: azure_devops_002
+      type: git
+      name: azure_devops_002/template-nodeJS
+      ref:  refs/heads/main
