@@ -16,13 +16,14 @@ resources:
       ref:  refs/heads/main
 
 stages:
-# - stage: PythonConfig
-#   jobs:
-#   - job: PythonConfigJob
-#     steps:
-#     - template: /templates/template-python.yml
 - stage: runAWS
   jobs:
   - job: runAWSJob
     steps:
     - template: /templates/template-aws-cli.yml
+
+- stage: repoexterno
+  jobs:
+  - job: Repoexterno
+    steps:
+    - checkout: azure_devops_002
