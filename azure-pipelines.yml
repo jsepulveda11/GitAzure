@@ -1,0 +1,23 @@
+# azure-pipelines.yml
+trigger:
+- feature-azure
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - group: 000-S3-AD
+
+stages:
+- resources:
+  repositories:
+    - repository: template-operaciones
+      type: git
+      name: GitOps/template-pipe-operaciones-gcloud-shell
+      ref:  refs/heads/master
+
+- stage: runAWS
+  jobs:
+  - job: runAWSJob
+    steps:
+    - template: /templates/template-aws-cli.yml
